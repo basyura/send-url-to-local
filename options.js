@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 保存された設定を読み込む
     chrome.storage.sync.get(['port'], function(result) {
-        if (result.port) {
+        if (result.port !== undefined) {
             portInput.value = result.port;
+        } else {
+            portInput.value = -1;
         }
     });
 

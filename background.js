@@ -4,7 +4,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
     // 設定からポート番号を取得
     const result = await chrome.storage.sync.get(['port']);
-    const port = result.port || 8080; // デフォルトは8080
+    const port = result.port || -1; // デフォルトは-1
 
     try {
         console.log("send : ", tab.url, "to port:", port);
