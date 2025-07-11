@@ -3,7 +3,7 @@
   "name": "Send URL to Local",
   "version": "1.0",
   "description": "現在開いているタブの URL をローカルの任意のポートに送信する Chrome 拡張機能。",
-  "permissions": ["tabs", "scripting"],
+  "permissions": ["tabs", "scripting", "storage"],
   "host_permissions": ["<all_urls>"],
   "action": {
     "default_title": "Send URL to Local",
@@ -23,6 +23,7 @@
   "background": {
     "service_worker": "background.js"
   },
+  "options_page": "options.html",
   "icons": {
     "16": "icon.png",
     "48": "icon.png",
