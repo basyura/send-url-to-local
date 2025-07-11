@@ -19,6 +19,6 @@ chrome.action.onClicked.addListener(async (tab) => {
         console.log("Sent URL:", tab.url, "Response status:", response.status);
     } catch (err) {
         console.error("Failed to send URL:", err);
-        chrome.tabs.sendMessage(tab.id, { type: "send-failed", url: tab.url });
+        chrome.tabs.sendMessage(tab.id, { type: "send-failed", url: tab.url, port: port });
     }
 });
