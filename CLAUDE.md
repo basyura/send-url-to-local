@@ -33,6 +33,10 @@ This project has no package.json, build tools, or package manager. Files are edi
 - Include console.log statements for debugging
 - Maintain Chrome Extension Manifest V3 patterns
 
+### Commit Messages
+- Use English only for commit messages
+- Follow existing commit message patterns in the repository
+
 ### Windows Commands
 - `dir` - List files (no `ls` available)
 - `type filename` - View file contents (no `cat` available)

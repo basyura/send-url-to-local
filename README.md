@@ -1,41 +1,40 @@
-# SEND URL TO LOCAL
+# Send URL to Local
 
-## 概要
+## Overview
 
-この Chrome 拡張は、現在開いているタブの URL をローカルの任意のポートに送信します。
-拡張機能のボタンをクリックすると、アクティブなタブの URL がローカルサーバーに POST リクエストとして送られます。
+This Chrome extension sends the URL of the currently active tab to any local port. When you click the extension button, the active tab's URL is sent as a POST request to a local server.
 
-## 機能
+## Features
 
-- ワンクリックで現在のタブの URL をローカルサーバーに送信
-- 送信先ポート番号の設定（1-65535）
-- 送信失敗時のエラー通知
-- Chrome の同期機能による設定の自動同期
+- Send current tab URL to local server with one click
+- Configurable destination port number (1-65535)
+- Error notification when sending fails
+- Automatic settings sync via Chrome sync
 
-## インストール方法
+## Installation
 
-1. このリポジトリをクローンまたはダウンロード
-2. Chrome で `chrome://extensions/` を開く
-3. 右上の「デベロッパーモード」を有効にする
-4. 「パッケージ化されていない拡張機能を読み込む」をクリック
-5. ダウンロードしたフォルダを選択
+1. Clone or download this repository
+2. Open `chrome://extensions/` in Chrome
+3. Enable "Developer mode" in the top right
+4. Click "Load unpacked"
+5. Select the downloaded folder
 
-## 使用方法
+## Usage
 
-### 初期設定
+### Initial Setup
 
-1. Chrome の拡張機能一覧で「Send URL to Local」の「詳細」をクリック
-2. 「拡張機能のオプション」をクリック
-3. 送信先のポート番号を設定（例：8080）
-4. 「保存」をクリック
+1. Go to Chrome extensions list and click "Details" for "Send URL to Local"
+2. Click "Extension options"
+3. Set the destination port number (e.g., 8080)
+4. Click "Save"
 
-### URL送信
+### Sending URLs
 
-1. 送信したいページを開く
-2. 拡張機能のアイコンをクリック
-3. 設定したポートで受信サーバーが起動していれば、URL が送信される
+1. Open the page you want to send
+2. Click the extension icon
+3. The URL will be sent if a receiving server is running on the configured port
 
-## 送信データ形式
+## Data Format
 
 ```json
 {
@@ -43,9 +42,9 @@
 }
 ```
 
-POST リクエストが `http://localhost:{設定したポート}` に送信されます。
+POST requests are sent to `http://localhost:{configured_port}`.
 
-## 受信サーバーの例
+## Example Receiving Servers
 
 ### Node.js (Express)
 
@@ -57,12 +56,12 @@ const PORT = 8080;
 app.use(express.json());
 
 app.post('/', (req, res) => {
-  console.log('受信したURL:', req.body.url);
+  console.log('Received URL:', req.body.url);
   res.status(200).send('OK');
 });
 
 app.listen(PORT, () => {
-  console.log(`サーバーがポート ${PORT} で起動しました`);
+  console.log(`Server running on port ${PORT}`);
 });
 ```
 
@@ -76,38 +75,38 @@ app = Flask(__name__)
 @app.route('/', methods=['POST'])
 def receive_url():
     data = request.get_json()
-    print(f"受信したURL: {data['url']}")
+    print(f"Received URL: {data['url']}")
     return 'OK', 200
 
 if __name__ == '__main__':
     app.run(port=8080)
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
-### URLが送信されない
+### URL not being sent
 
-- ローカルサーバーが起動しているか確認
-- ポート番号が正しく設定されているか確認
-- ブラウザのコンソール（F12）でエラーメッセージを確認
+- Check if local server is running
+- Verify port number is correctly configured
+- Check browser console (F12) for error messages
 
-### 設定が保存されない
+### Settings not saving
 
-- Chrome の同期機能が有効になっているか確認
-- 拡張機能が正常にインストールされているか確認
+- Check if Chrome sync is enabled
+- Verify extension is properly installed
 
-## 開発者向け情報
+## Developer Information
 
-### ファイル構成
+### File Structure
 
-- `manifest.json`: 拡張機能の設定
-- `background.js`: URL送信処理のメインロジック
-- `content.js`: エラーメッセージ表示用
-- `options.html/js`: 設定ページ
-- `icon.png`: 拡張機能のアイコン
+- `manifest.json`: Extension configuration
+- `background.js`: Main logic for URL sending
+- `content.js`: Error message display
+- `options.html/js`: Settings page
+- `icon.png`: Extension icon
 
-### デバッグ方法
+### Debugging
 
-1. `chrome://extensions/` で「詳細」をクリック
-2. 「バックグラウンドページを検査」でデベロッパーツールを開く
-3. Console タブでログを確認
+1. Go to `chrome://extensions/` and click "Details"
+2. Click "Inspect views: background page" to open developer tools
+3. Check Console tab for logs
