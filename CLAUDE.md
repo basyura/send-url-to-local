@@ -33,6 +33,10 @@ This project has no package.json, build tools, or package manager. Files are edi
 - Include console.log statements for debugging
 - Maintain Chrome Extension Manifest V3 patterns
 
+### After Code Changes
+- Run syntax check on modified JavaScript files: `node -c filename.js`
+- Only check files that were actually modified
+
 ### Commit Messages
 - Use English only for commit messages
 - Follow existing commit message patterns in the repository

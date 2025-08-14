@@ -17,6 +17,11 @@ chrome.action.onClicked.addListener(async (tab) => {
         });
 
         console.log("Sent URL:", tab.url, "Response status:", response.status);
+        
+        // レスポンスが OK (200) の場合はタブを閉じる
+        if (response.ok) {
+            chrome.tabs.remove(tab.id);
+        }
     } catch (err) {
         console.error("Failed to send URL:", err);
         chrome.tabs.sendMessage(tab.id, { type: "send-failed", url: tab.url, port: port });
